@@ -1,0 +1,282 @@
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Montserrat', sans-serif;
+	height: 100vh;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+
+h2 {
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.underline {
+	margin: 0 auto 40px;
+	width: 60px;
+	height: 4px;
+	background-color: royalblue;
+}
+
+nav {
+	display: block;
+	text-transform: uppercase;
+	-webkit-transition: background-color 0.6s;
+	transition: background-color 0.6s;
+	z-index: 1;
+}
+
+nav .nav-link,
+nav .navbar-brand,
+nav .fa-bars {
+	color: #fff;
+}
+
+nav .nav-link:hover {
+	color: royalblue;
+}
+
+nav .fa-bars {
+	padding: 10px;
+}
+
+nav .navbar-brand {
+	font-size: 38px;
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+
+nav .active {
+	color: royalblue;
+}
+
+.search-btn {
+	-webkit-transition: background-color 0.6s;
+	transition: background-color 0.6s;
+}
+
+.search-btn:hover {
+	background-color: #0dcaf0;
+}
+
+.card-img {
+	width: 100%;
+	height: 220px;
+	-o-object-fit: cover;
+	object-fit: cover;
+}
+
+.more-info-btn {
+	background-color: rgb(233, 236, 239);
+}
+
+.more-info-btn,
+.delete-btn {
+	font-size: 18px;
+	border: 1px solid black;
+	-webkit-transition: background-color 0.6s, font-weight 0.6s;
+	transition: background-color 0.6s, font-weight 0.6s;
+}
+
+.more-info-btn:hover {
+	background-color: #0dcaf0;
+}
+
+.delete-btn:hover {
+	border: 2px solid black;
+}
+
+footer {
+	margin-top: auto;
+	height: 84px;
+	line-height: 80px;
+	color: #ddd;
+	text-align: center;
+	font-size: 20px;
+}
+
+footer .icon-box {
+	margin-left: 20px;
+}
+
+footer .icon-box a {
+	margin: 0 5px;
+	color: #ddd;
+	font-size: 30px;
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+}
+
+footer .icon-box a:hover {
+	color: #0086f3;
+}
+
+@media (max-width: 768px) {
+	.delete-btn {
+		width: 400px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+	.delete-btn {
+		width: 100px;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+	.delete-btn {
+		width: 150px;
+	}
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+	.delete-btn {
+		width: 180px;
+	}
+}
+
+@media (min-width: 1400px) {
+	.delete-btn {
+		width: 200px;
+	}
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.8);
+	padding-top: 60px;
+}
+
+.modal-content {
+	background-color: white;
+	margin: 50px auto;
+	width: 480px;
+	height: 500px;
+	position: relative;
+}
+
+.animate {
+	-webkit-animation: animatezoom 0.6s;
+	animation: animatezoom 0.6s;
+}
+
+@-webkit-keyframes animatezoom {
+	from {
+		-webkit-transform: scale(0);
+	}
+	to {
+		-webkit-transform: scale(1);
+	}
+}
+
+@keyframes animatezoom {
+	from {
+		-webkit-transform: scale(0);
+		transform: scale(0);
+	}
+	to {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+
+.close {
+	position: absolute;
+	right: 25px;
+	top: 0;
+	color: #000;
+	font-size: 65px;
+}
+
+.close:hover,
+.close:focus {
+	color: red;
+	cursor: pointer;
+}
+
+.form-group label {
+	font-size: 24px;
+}
+
+.form-group input {
+	width: 400px;
+	font-size: 24px;
+}
+
+.login-box {
+	position: absolute;
+	top: 15%;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
+.in_log {
+	position: absolute;
+	top: 135%;
+	width: 400px;
+	height: 60px;
+	background: #007bff;
+	color: white;
+	font-size: 20px;
+	padding: 4.2px 0;
+	border: none;
+	font-weight: bold;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+	cursor: pointer;
+}
+
+.in_log span {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+}
+
+.in_log span:after {
+	content: '\00bb';
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	right: -20px;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+}
+
+.in_log:hover span {
+	padding-right: 25px;
+}
+
+.in_log:hover span:after {
+	opacity: 1;
+	right: 0;
+}
+
+.add-ad {
+	font-size: 24px;
+}
+
+.add-ad button {
+	font-size: 24px;
+}
+/*# sourceMappingURL=style.css.map */

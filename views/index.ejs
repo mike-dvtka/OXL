@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Michał Dutka">
+    <meta name="keywords" content="samochody, ogłoszenia">
+    <meta name="description" content="Ogłoszenia używanych samochodów w Polsce">
+    <title>OXL - Ogłoszenia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <script src="https://kit.fontawesome.com/69dde7d2b4.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-light">
+
+    <nav id="navbar" class="navbar navbar-expand-lg position-sticky top-0 w-100 py-3 bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">oxl</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ms-auto">
+                    <a href="/addAd" class="nav-link" style="text-align: center">dodaj ogłoszenie</a>
+                    <button class="nav-link" onclick="document.getElementById('id01').style.display='block'"
+                        style="border:none;background: none;text-transform: uppercase;">zaloguj
+                        się</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-5">
+        <div class="container">
+            <form action="/search" method="GET">
+                <div class="card mb-2">
+                    <div class="card-body p-2">
+                        <div class="input-group input-group-lg">
+                            <input type="text" class="form-control form-control-lg rounded"
+                                placeholder="Wpisz markę lub model" name="searchBar" aria-label="Type Keywords"
+                                aria-describedby="basic-addon2" />
+                            <input type="submit" class="input-group-text border-0 search-btn" id="basic-addon2"
+                                value="Szukaj" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <main>
+        <section class="bg-light py-5">
+            <div class="container">
+                <h2>aktualne ogłoszenia (<%= data.length %>)</h2>
+                <div class="underline"></div>
+                <% data.forEach(function(row){ %>
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                <img src="data:image/<%=row.carPicture.contentType%>;base64,
+                                <%=row.carPicture.data.toString('base64')%>" class="img-fluid card-img rounded-start"
+                                    alt="Zdjęcie samochodu do ogłoszenia o <%=row.carBrand %> <%=row.carModel %>.">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h2 class="card-title" style="text-align: left;">
+                                        <%= row.carBrand %>
+                                            <%= row.carModel %>
+                                    </h2>
+                                    <h3 class="card-subtitle mb-2 text-muted">
+                                        <%= row.carPrice %> zł
+                                    </h3>
+                                    <p class="card-text pt-lg-4">
+                                        <%= row.carDescription %>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-center justify-content-center">
+                                <form action="/moreInfo/<%= row._id %>" method="GET">
+                                    <button class="btn m-2 delete-btn more-info-btn" type="submit">Więcej</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+
+            </div>
+        </section>
+
+    </main>
+
+    <div id="id01" class="modal">
+        <div id="id02" class="modal-content animate">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                title="Zamknij">&times;</span>
+            <div class="log container">
+                <form action="/login" method="post">
+                    <div class="login-box">
+                        <div class="form-group">
+                            <label for="usernameLogin">Nazwa użytkownika</label>
+                            <input type="text" class="form-control mt-2" id="usernameLogin"
+                                placeholder="Podaj nazwę użytkownika" name="usernameLogin" required>
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="passwordLogin">Hasło</label>
+                            <input type="password" class="form-control mt-2" id="passwordLogin"
+                                placeholder="Podaj hasło" name="passwordLogin" required>
+                        </div>
+                        <button type="submit" class="in_log">
+                            <span>ZALOGUJ SIĘ</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark">
+        <p>&copy; 2022 <span style="letter-spacing: 2px;">OXL</span>
+            <span class="icon-box">
+                <a href="#"><i class="fab fa-twitter-square"></i></a>
+                <a href="#"><i class="fab fa-facebook-square"></i></a>
+            </span>
+        </p>
+    </footer>
+    <% if (messages.error) { %>
+        <script>
+            var text = "<%= messages.error %>";
+            alert(text);
+        </script>
+        <% } %>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+                crossorigin="anonymous"></script>
+            <script src="/public/js/script.js"></script>
+</body>
+
+</html>
