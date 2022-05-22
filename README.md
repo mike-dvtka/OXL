@@ -15,5 +15,8 @@ Kilka ciekawych rzeczy:
 - po kliknięciu "Więcej" mamy kilka dodatkowych informacji o ogłoszeniu
 
 Aby uruchomić:
+- stworzyć w katalogu z projektem plik .env i wkleić to do niego:
+SESSION_SECRET=secret
+MONGO_URL=mongodb://localhost/oxldb 
 - npm install
 - npm start
